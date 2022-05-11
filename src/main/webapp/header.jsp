@@ -5,19 +5,13 @@
 --%>
 <%@page import="com.mycitysmart.entities.User"%>
 <%!
-    String userType="guest";
-
+    User user;
+    String userType="none";
 %>
 <%
     if(session.getAttribute("user")!=null){
-        User user=(User)session.getAttribute("user");
-        if(user.getUsertype().equals("customer")){
-            userType="customer";
-        }else{
-            if(user.getUsertype().equals("serviceprovider")){
-                userType="serviceprovider";
-            }
-        }
+        user=(User)session.getAttribute("user");
+        userType=user.getUsertype();
     }
 %>
 
@@ -32,29 +26,51 @@
 
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
+            <%
             
+                switch(userType){
+                    case "serviceprovider":
+            %>
+          <li><a class="nav-link scrollto active" href="index.jsp">Home</a></li>
+<!--          <li><a class="nav-link scrollto" href="login.jsp">Login</a></li>-->
+          <li class="dropdown"><a href="#"><span>My Account</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="#">My profile</a></li>
+              <li><a href="#">My Services</a></li>
+              <li><a href="#">My Staff</a></li>
+            </ul>
+          </li>
+          <li><a class="nav-link scrollto" href="logout">Logout</a></li>
+          <%
+              break;
+              case "customer":
+          %>
+          
+          <li><a class="nav-link scrollto active" href="userHome.jsp">Home</a></li>
+<!--          <li><a class="nav-link scrollto" href="signup.jsp">SignUp</a></li>-->
+          <li class="dropdown"><a href="#"><span>My Account</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="#">My Profile</a></li>
+              <li><a href="logout">Logout</a></li>
+            </ul>
+          </li>
+          <%
+              break;
+              
+              default:
+          %>
+          
           <li><a class="nav-link scrollto active" href="index.jsp">Home</a></li>
           <li><a class="nav-link scrollto" href="login.jsp">Login</a></li>
           <li><a class="nav-link scrollto" href="signup.jsp">SignUp</a></li>
-<!--          <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li><a href="#">Drop Down 1</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-                <ul>
-                  <li><a href="#">Deep Drop Down 1</a></li>
-                  <li><a href="#">Deep Drop Down 2</a></li>
-                  <li><a href="#">Deep Drop Down 3</a></li>
-                  <li><a href="#">Deep Drop Down 4</a></li>
-                  <li><a href="#">Deep Drop Down 5</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Drop Down 2</a></li>
-              <li><a href="#">Drop Down 3</a></li>
-              <li><a href="#">Drop Down 4</a></li>
-            </ul>
-          </li>
-          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-        </ul>-->
+          
+          <%
+            break;
+              }
+          %>
+          
+          
+        </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
       
