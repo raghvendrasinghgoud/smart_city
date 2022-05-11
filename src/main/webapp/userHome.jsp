@@ -59,7 +59,7 @@
 </head>
     <body>
         <jsp:include page="header.jsp" />
-        <div class="input-group">
+        <div class="input-group container">
   <div class="form-outline">
     <input id="search-input" type="search" id="form1" class="form-control" />
     <label class="form-label" for="form1">Search</label>

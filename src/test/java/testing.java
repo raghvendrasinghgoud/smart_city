@@ -96,7 +96,7 @@ public class testing {
             System.out.println("new name"+u.getFirstName());
             System.out.println(ud.getUserById(u.getEmail()));
             
-            System.out.println((ud.UserLogin(u.getEmail(), u.getPassword(), u.getUsertype()))?"loggedIn":"user not found");
+            System.out.println((ud.UserLogin(u.getEmail(), u.getPassword()))?"loggedIn":"user not found");
             
             System.out.println((ud.isUserExists(u.getEmail())?"exists":"not exists"));
             System.out.println("xyz@gmail ="+(ud.isUserExists("xyz@gmail")?"exists":"not exists"));
