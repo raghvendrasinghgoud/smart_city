@@ -1,0 +1,21 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+    <hibernate-configuration>
+        <session-factory>
+            <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+            <property name="connection.url">jdbc:mysql://localhost:3306/smartcity</property>
+            <property name="connection.username">root</property>
+            <property name="connection.password">Raghav@123</property>
+            <property name="hbm2ddl.auto">update</property>
+            <property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
+            <property name="show_sql">true</property>
+            <mapping class="com.mycitysmart.entities.User" />
+            <mapping class="com.mycitysmart.entities.Customer" />
+            <mapping class="com.mycitysmart.entities.Address" />
+            <mapping class="com.mycitysmart.entities.ServiceProvider" />
+            <mapping class="com.mycitysmart.entities.Service" />
+            <mapping class="com.mycitysmart.entities.Staff" />
+        </session-factory>
+    </hibernate-configuration>
