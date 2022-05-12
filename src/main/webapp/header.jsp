@@ -10,8 +10,7 @@
 %>
 <%
     if(session.getAttribute("user")!=null){
-        user=(User)session.getAttribute("user");
-        userType=user.getUsertype();
+        userType=(String)session.getAttribute("usertype");
     }
 %>
 
@@ -33,11 +32,11 @@
             %>
           <li><a class="nav-link scrollto active" href="index.jsp">Home</a></li>
 <!--          <li><a class="nav-link scrollto" href="login.jsp">Login</a></li>-->
-          <li class="dropdown"><a href="#"><span>My Account</span> <i class="bi bi-chevron-down"></i></a>
+          <li class="dropdown"><span>My Account</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="#">My profile</a></li>
-              <li><a href="#">My Services</a></li>
-              <li><a href="#">My Staff</a></li>
+              <li><a href="myProfile.jsp">My profile</a></li>
+              <li><a href="myServices.jsp">My Services</a></li>
+              <li><a href="myStaff.jsp">My Staff</a></li>
             </ul>
           </li>
           <li><a class="nav-link scrollto" href="logout">Logout</a></li>
@@ -48,9 +47,9 @@
           
           <li><a class="nav-link scrollto active" href="userHome.jsp">Home</a></li>
 <!--          <li><a class="nav-link scrollto" href="signup.jsp">SignUp</a></li>-->
-          <li class="dropdown"><a href="#"><span>My Account</span> <i class="bi bi-chevron-down"></i></a>
+          <li class="dropdown"><span>My Account</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="#">My Profile</a></li>
+              <li><a href="myProfile.jsp">My Profile</a></li>
               <li><a href="logout">Logout</a></li>
             </ul>
           </li>

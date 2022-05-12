@@ -44,11 +44,13 @@ public class login extends HttpServlet {
            HttpSession session=request.getSession();
            User user=ud.getUserById(email);
            if(user.getUsertype().equals("customer")){
-               Customer c=new CustomerDAO(SessionProvider.getSessionFactory()).getCustomerById(email);
-               session.setAttribute("user", c);
+               //Customer c=new CustomerDAO(SessionProvider.getSessionFactory()).getCustomerById(email);
+               session.setAttribute("user", user);
+               session.setAttribute("usertype",user.getUsertype());
            }else{
-               ServiceProvider sp=new ServiceProviderDAO(SessionProvider.getSessionFactory()).getServiceProviderById(email);
-               session.setAttribute("user", ud);
+               //ServiceProvider sp=new ServiceProviderDAO(SessionProvider.getSessionFactory()).getServiceProviderById(email);
+               session.setAttribute("user", user);
+               session.setAttribute("usertype", user.getUsertype());
            }
            response.sendRedirect("userHome.jsp");
        }else{

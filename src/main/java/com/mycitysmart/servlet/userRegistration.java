@@ -85,8 +85,8 @@ public class userRegistration extends HttpServlet {
             
             
             //starting session
-            session.setAttribute("user", c);
-            
+            session.setAttribute("user", user);
+            session.setAttribute("usertype", user.getUsertype());
             //redirecting to home page
             response.sendRedirect("userHome.jsp");
         }else{
@@ -118,7 +118,8 @@ public class userRegistration extends HttpServlet {
                 new ServiceProviderDAO(SessionProvider.getSessionFactory()).SaveServiceProvider(sp);
                 
                 //starting session
-            session.setAttribute("user", sp);
+            session.setAttribute("user", user);
+            session.setAttribute("usertype", user.getUsertype());
             //redirecting to home page
             response.sendRedirect("userHome.jsp");
             }

@@ -31,7 +31,6 @@ public class UserDAO {
     public boolean UserLogin(String Id,String Password){
         if(isUserExists(Id)){
             System.out.println(Id+" user exists");
-            System.out.println(getUserById(Id));
             if(getUserById(Id).getPassword().equals(Password)){ 
                 System.out.println("password Matched");
                 return true;

@@ -1,34 +1,48 @@
 <%-- 
-    Document   : userHome
-    Created on : May 11, 2022, 2:19:00 PM
+    Document   : myStaff
+    Created on : May 12, 2022, 1:47:15 PM
     Author     : raghavendra
 --%>
 
+<%@page import="com.mycitysmart.entities.Staff"%>
 <%@page import="com.mycitysmart.entities.Service"%>
 <%@page import="java.util.List"%>
+<%@page import="java.util.List"%>
+<%@page import="com.mycitysmart.dao.CustomerDAO"%>
+<%@page import="com.mycitysmart.dao.ServiceProviderDAO"%>
 <%@page import="com.mycitysmart.helper.SessionProvider"%>
-<%@page import="com.mycitysmart.dao.ServiceDAO"%>
+<%@page import="com.mycitysmart.entities.User"%>
+<%@page import="com.mycitysmart.entities.Customer"%>
+<%@page import="com.mycitysmart.entities.ServiceProvider"%>
+<%@page import="com.mycitysmart.entities.ServiceProvider"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 
 <%
         if(session.getAttribute("user")==null){
             response.sendRedirect("login.jsp");
         }
-        ServiceDAO sd=new ServiceDAO(SessionProvider.getSessionFactory());
-        List<Service> servlist=sd.getAllServices();
-    
+        ServiceProvider sp=null;
+        Customer cus=null;
+        User user=(User)session.getAttribute("user");
+        if(user.getUsertype().equals("customer")){
+            cus=new CustomerDAO(SessionProvider.getSessionFactory()).getCustomerById(user.getEmail());
+        }else{
+            if(user.getUsertype().equals("serviceprovider")){
+                sp=new ServiceProviderDAO(SessionProvider.getSessionFactory()).getServiceProviderById(user.getEmail());
+            }else{
+                response.sendRedirect("login.jsp");
+            }
+        }
 %>
-<!DOCTYPE html>
-<html>
-    <!DOCTYPE html>
-<html lang="en">
 
-<head>
-  <!-- Required meta tags -->
+<html>
+    <head>
+       <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <title>Smart City - Home</title>
+  <title>Smart City - My Staff</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -61,36 +75,38 @@
   <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     
-</head>
+    </head>
     <body>
         <jsp:include page="header.jsp" />
-        
-        
         <div class="container my-5">
-        <div class="input-group rounded">
-  <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-  <span class="input-group-text border-0" id="search-addon">
-    <i class="fas fa-search"></i>
-  </span>
-</div>
-          <div class="my-5 d-flex align-content-stretch flex-wrap">
-              
-              <%
-                  for(Service s:servlist){
-              %>
-                <div class="card" style="width: 18rem;margin: 10px">
-  <div class="card-body">
-    <h5 class="card-title"><%= s.getName()  %></h5>
-    <h6 class="card-subtitle mb-2 text-muted"><%= s.getRate() %> &#8377</h6>
-    <p class="card-text"><%= s.getDescription()  %></p>
-    <a href="viewService.jsp?sid=<%= s.getSId() %>" class="card-link">Read More</a>
-  </div>
-</div>
-                <%
-                    }
-                %>
-
+            
+            <h3 class="text-center m-5">My Services</h3>
+            
+            <table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Staff Member Name</th>
+      <th scope="col">Designation</th>
+    </tr>
+  </thead>
+  <tbody>
+      <%
+          List<Staff> stafflist=sp.getStaff();
+          
+            for(Staff staff:stafflist){
+      %>
+    <tr>
+      <th scope="row"><%= staff.getEId() %></th>
+      <td><%= staff.getName() %></td>
+      <td><%= staff.getDesignation() %></td>
+    </tr>
+    <%  } %>
+    
+  </tbody>
+</table>
         </div>
+        
         <jsp:include page="footer.jsp" />
     </body>
 </html>
