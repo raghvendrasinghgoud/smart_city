@@ -44,4 +44,8 @@ public class ServiceDAO {
      public List<Service> getServiceProviderServices(String email){
          return session.createQuery("FROM Service as s WHERE s.serviceprovider='"+email+"'", Service.class).getResultList(); 
      }
+     
+     public List<Service> searchServices(String query){
+         return session.createQuery("FROM Service as s WHERE s.name like '%"+query+"%'", Service.class).getResultList(); 
+     }
 }

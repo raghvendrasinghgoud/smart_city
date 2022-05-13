@@ -15,7 +15,13 @@
             response.sendRedirect("login.jsp");
         }
         ServiceDAO sd=new ServiceDAO(SessionProvider.getSessionFactory());
-        List<Service> servlist=sd.getAllServices();
+        List<Service> servlist;
+        String query=request.getParameter("query");
+        if(query!=null || query==""){
+            servlist=sd.searchServices(query);
+        }else{
+            servlist=sd.getAllServices();
+        }
     
 %>
 <!DOCTYPE html>
@@ -67,12 +73,15 @@
         
         
         <div class="container my-5">
-        <div class="input-group rounded">
-  <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+<!--        <div class="input-group rounded">-->
+     <form class="input-group rounded" action="userHome.jsp" method="post">
+  <input type="search" class="form-control rounded" name="query" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+  
   <span class="input-group-text border-0" id="search-addon">
     <i class="fas fa-search"></i>
   </span>
-</div>
+  </form>
+<!--</div>-->
           <div class="my-5 d-flex align-content-stretch flex-wrap">
               
               <%
