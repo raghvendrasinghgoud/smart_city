@@ -82,9 +82,9 @@ background: #eee;
             <label class="form-label" for="form1Example23">Password</label>
           </div>
 
-          <div class="d-flex justify-content-around align-items-center mb-4">
+<!--          <div class="d-flex justify-content-around align-items-center mb-4">
             <a href="#!">Forgot password?</a>
-          </div>
+          </div>-->
 
           <!-- Submit button -->
           <button type="submit" class="btn btn-primary btn-lg btn-block">Log in</button>
